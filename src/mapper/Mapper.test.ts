@@ -20,6 +20,11 @@ describe("mapArabicToHebrewLettersValidMaps", () => {
         { id: 3, arabic: "ت", hebrew: "ת" },
         { id: 4, arabic: "ث", hebrew: "ת'" },
         { id: 5, arabic: "مرحبا", hebrew: "מרחבּא" },
+        { id: 6, arabic: "مرحبا مرحبا", hebrew: "מרחבּא מרחבּא" },
+        { id: 7, arabic: "مرحبه مرحبه", hebrew: "מרחבּו מרחבּו" },
+        { id: 8, arabic: "مرحبة مرحبة", hebrew: "מרחבּה מרחבּה" },
+        { id: 9, arabic: "اهلا", hebrew: "אהלא" },
+        { id: 10, arabic: "بيعملوا", hebrew: "בּיעמלו" },
     ]
 
     expectedMappings.forEach((mapping) => {
