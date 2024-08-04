@@ -9,7 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "perdeploy": "npm run build",
+    "deploy": "hg-pages -d build"
   },
   "dependencies": {
     "react": "^18.3.1",
