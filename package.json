@@ -1,6 +1,6 @@
 {
   "name": "arabic_react",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://tomerbrown.github.io/arabic_react/",
