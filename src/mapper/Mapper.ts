@@ -1,3 +1,6 @@
+import { oneToOneMapping } from "./lettersMapping";
+import { wordMapping } from "./wordsMapping";
+
 export function mapArabicToHebrewLetters(input: string): string {
   const translatedWords: string[] = [];
   const words = input.split(" ");
@@ -6,6 +9,11 @@ export function mapArabicToHebrewLetters(input: string): string {
 }
 
 function mapWord(word: string): string {
+
+    if (wordMapping.has(word)) {
+        return wordMapping.get(word) || "";
+    }
+
     let suffix = "";
     if (word.endsWith("وا")) {
         suffix = "ו"
@@ -21,42 +29,3 @@ function mapWord(word: string): string {
 }
 
 
-const oneToOneMapping: Map<string, string> = new Map([
-  ["ء", "א"],
-  ["ا", "א"],
-  ["ب", "בּ"],
-  ["ت", "ת"],
-  ["ث", "ת'"],
-  ["ج", "ג'"],
-  ["ح", "ח"],
-  ["خ", "ח'"],
-  ["د", "ד"],
-  ["ذ", "ד'"],
-  ["ر", "ר"],
-  ["ز", "ז"],
-  ["س", "ס"],
-  ["ش", "ש"],
-  ["ص", "צ"],
-  ["ض", "צ'"],
-  ["ط", "ט"],
-  ["ظ", "ט'"],
-  ["ع", "ע"],
-  ["غ", "ע'"],
-  ["ف", "פ"],
-  ["ق", "ק"],
-  ["ك", "כּ"],
-  ["ل", "ל"],
-  ["م", "מ"],
-  ["ن", "נ"],
-  ["ه", "ה"],
-  ["و", "ו"],
-  ["ي", "י"],
-  ["ى", "א"],
-  ["آ", "אַא"],
-  ["ة", "ה"],
-  ["إ", "א"],
-  ["أ", "א"],
-  ["ؤ", "ו"],
-  ["ئ", "י"],
-  ["؟", "?"],
-]);
