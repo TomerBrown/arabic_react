@@ -1,4 +1,5 @@
 import { oneToOneMapping } from "./lettersMapping";
+import specialSuffixes from "./specialSuffixes";
 import { wordMapping } from "./wordsMapping";
 
 export function mapArabicToHebrewLetters(input: string): string {
@@ -9,23 +10,21 @@ export function mapArabicToHebrewLetters(input: string): string {
 }
 
 function mapWord(word: string): string {
+  // First we try to match the whole word
+  if (wordMapping.has(word)) {
+    return wordMapping.get(word) || "";
+  }
 
-    if (wordMapping.has(word)) {
-        return wordMapping.get(word) || "";
-    }
+  // Then we try to match special suffixes.
+  const { suffix, updatedWord } = specialSuffixes(word);
+  word = updatedWord;
 
-    let suffix = "";
-    if (word.endsWith("وا")) {
-        suffix = "ו"
-        word = word.slice(0, -2);
-    }
-    if (word.endsWith("ه")) {
-        suffix = "ו"
-        word = word.slice(0, -1);
-    }
+  // Otherwise we fallback to mapping each letter individually.
+  const wordBeginingHebrew = word
+    .split("")
+    .map((char) => oneToOneMapping.get(char) || char)
+    .join("");
 
-    const wordBeginingHebrew = word.split("").map((char) => oneToOneMapping.get(char) || char).join("");
-    return  wordBeginingHebrew + suffix;
+  // If we have a suffix, we append it to the word.
+  return wordBeginingHebrew + suffix;
 }
-
-
