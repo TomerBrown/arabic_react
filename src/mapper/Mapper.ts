@@ -26,5 +26,28 @@ function mapWord(word: string): string {
     .join("");
 
   // If we have a suffix, we append it to the word.
-  return wordBeginingHebrew + suffix;
+  const completeHebrewWord = wordBeginingHebrew + suffix;
+  // Adapt the last letter if needed.
+  return adaptLastHebrewLetter(completeHebrewWord);
 }
+
+const adaptLastHebrewLetter = (word: string): string => {
+  const lastLetter = word.slice(-1);
+  const lastLetterMapping = new Map([
+    ["מ", "ם"],
+    ["נ", "ן"],
+    ["פ", "ף"],
+    ["צ", "ץ"],
+  ]);
+
+  let newLastLetter; 
+  if (word.endsWith("כּ")) {
+    word = word.slice(0, -2);
+    newLastLetter = "ךּ";
+  } else {
+    newLastLetter = lastLetterMapping.get(lastLetter) || lastLetter;
+    word = word.slice(0, -1);
+  }
+  
+  return word.concat(newLastLetter);
+};

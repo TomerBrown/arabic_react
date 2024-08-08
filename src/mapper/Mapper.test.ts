@@ -24,11 +24,19 @@ describe("mapArabicToHebrewLettersValidMaps", () => {
     { id: 8, arabic: "مرحبة مرحبة", hebrew: "מרחבּה מרחבּה" },
     { id: 9, arabic: "اهلا", hebrew: "אהלאן" },
     { id: 10, arabic: "بيعملوا", hebrew: "בּיעמלו" },
-    { id: 11, arabic: "انا بحيبك جدا", hebrew: "אנא בּחיבּכּ ג'ידאן" },
-    { id: 12, arabic: "تعال هن فورا", hebrew: "תעאל הנ פוראן" },
+    { id: 11, arabic: "انا بحيبك جدا", hebrew: "אנא בּחיבּךּ ג'ידאן" },
+    { id: 12, arabic: "تعال هن فورا", hebrew: "תעאל הן פוראן" },
     { id: 13, arabic: "احيانا اروح عالبحر", hebrew: "אחיאנאן ארוח עאלבּחר" },
     { id: 14, arabic: "حمدالله", hebrew: "חמדאללה" },
     { id: 15, arabic: "الله اكبر", hebrew: "אללה אכּבּר" },
+    { id: 16, arabic: "الله يرحمه", hebrew: "אללה ירחמו" },
+    { id: 17, arabic: "الله يرحمك", hebrew: "אללה ירחמךּ" },
+    { id: 18, arabic: "معلوم", hebrew: "מעלום" },
+    {
+      id: 17,
+      arabic: "كان يا مكان في قديم الزمان",
+      hebrew: "כּאן יא מכּאן פי קדים אלזמאן",
+    },
   ];
 
   expectedMappings.forEach((mapping) => {
