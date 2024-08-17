@@ -33,7 +33,7 @@ describe("mapArabicToHebrewLettersValidMaps", () => {
     { id: 17, arabic: "الله يرحمك", hebrew: "אללה ירחמךּ" },
     { id: 18, arabic: "معلوم", hebrew: "מעלום" },
     {
-      id: 17,
+      id: 19,
       arabic: "كان يا مكان في قديم الزمان",
       hebrew: "כּאן יא מכּאן פי קדים אלזמאן",
     },
