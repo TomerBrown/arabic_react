@@ -4,9 +4,13 @@ import { wordMapping } from "./wordsMapping";
 
 export function mapArabicToHebrewLetters(input: string): string {
   const translatedWords: string[] = [];
+  input = preProcessInput(input);
   const words = input.split(" ");
   words.forEach((word) => translatedWords.push(mapWord(word)));
   return translatedWords.join(" ");
+}
+function preProcessInput(input: string): string {
+  return input.replace(/( ً| ُ| ٌ| ِ| ٍ| ّ )/g, "");
 }
 
 function mapWord(word: string): string {

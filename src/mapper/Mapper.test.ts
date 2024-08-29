@@ -3,6 +3,7 @@ import { describe, expect, test } from "@jest/globals";
 
 interface MappingTest {
   id: number;
+  description?: string;
   arabic: string;
   hebrew: string;
 }
@@ -26,22 +27,68 @@ describe("mapArabicToHebrewLettersValidMaps", () => {
     { id: 10, arabic: "بيعملوا", hebrew: "בּיעמלו" },
     { id: 11, arabic: "انا بحيبك جدا", hebrew: "אנא בּחיבּךּ ג'ידאן" },
     { id: 12, arabic: "تعال هن فورا", hebrew: "תעאל הן פוראן" },
-    { id: 13, arabic: "احيانا اروح عالبحر", hebrew: "אחיאנאן ארוח עאלבּחר" },
-    { id: 14, arabic: "حمدالله", hebrew: "חמדאללה" },
-    { id: 15, arabic: "الله اكبر", hebrew: "אללה אכּבּר" },
-    { id: 16, arabic: "الله يرحمه", hebrew: "אללה ירחמו" },
-    { id: 17, arabic: "الله يرحمك", hebrew: "אללה ירחמךּ" },
-    { id: 18, arabic: "معلوم", hebrew: "מעלום" },
+    {
+      id: 13,
+      description: "Special words should be mapped correctly.",
+      arabic: "احيانا اروح عالبحر",
+      hebrew: "אחיאנאן ארוח עאלבּחר",
+    },
+    {
+      id: 14,
+      description: "Special words should be mapped correctly.",
+      arabic: "حمدالله",
+      hebrew: "חמדאללה",
+    },
+    {
+      id: 15,
+      description: "Special words should be mapped correctly.",
+      arabic: "الله اكبر",
+      hebrew: "אללה אכּבּר",
+    },
+    {
+      id: 16,
+      description: "Special words should be mapped correctly.",
+      arabic: "الله يرحمه",
+      hebrew: "אללה ירחמו",
+    },
+    {
+      id: 17,
+      description: "Special words should be mapped correctly.",
+      arabic: "الله يرحمك",
+      hebrew: "אללה ירחמךּ",
+    },
+    {
+      id: 18,
+      description:
+        "Words in Hebrew should end with end-form letter (ם, ן, ף, ץ)",
+      arabic: "معلوم",
+      hebrew: "מעלום",
+    },
     {
       id: 19,
+      description:
+        "Words in Hebrew should end with end-form letter (ם, ן, ף, ץ)",
       arabic: "كان يا مكان في قديم الزمان",
+      hebrew: "כּאן יא מכּאן פי קדים אלזמאן",
+    },
+    {
+      id: 20,
+      description: "Diacritics should be ignored",
+      arabic: "كان ُ ي ُا مكان ف ًي قد ًيم الزم ًان",
       hebrew: "כּאן יא מכּאן פי קדים אלזמאן",
     },
   ];
 
   expectedMappings.forEach((mapping) => {
-    test(`mapping ${mapping.id} should map ${mapping.arabic} to ${mapping.hebrew}`, () => {
-      expect(mapArabicToHebrewLetters(mapping.arabic)).toBe(mapping.hebrew);
-    });
+    test(
+      `mapping ${mapping.id} should map ${mapping.arabic} to ${mapping.hebrew}` +
+        mapping.description ===
+        null
+        ? ""
+        : ` (${mapping.description})`,
+      () => {
+        expect(mapArabicToHebrewLetters(mapping.arabic)).toBe(mapping.hebrew);
+      }
+    );
   });
 });
