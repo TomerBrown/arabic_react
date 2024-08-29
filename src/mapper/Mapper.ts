@@ -5,10 +5,39 @@ import { wordMapping } from "./wordsMapping";
 export function mapArabicToHebrewLetters(input: string): string {
   const translatedWords: string[] = [];
   input = preProcessInput(input);
-  const words = input.split(" ");
-  words.forEach((word) => translatedWords.push(mapWord(word)));
-  return translatedWords.join(" ");
+  const sequence = splitArabicSentence(input);
+  sequence.forEach((word) =>
+    word.type === "word"
+      ? translatedWords.push(mapWord(word.word))
+      : translatedWords.push(word.word)
+  );
+
+  return translatedWords.join("");
 }
+
+function splitArabicSentence(input: string): { word: string; type: string }[] {
+  const result: { word: string; type: string }[] = [];
+
+  // Regular expression to match Arabic words, the Arabic question mark (U+061F), and other separators
+  const regex = /([\u0600-\u061F]|[\u0620-\u06FF]+)|(؟)|([^\u0600-\u06FF؟]+)/g;
+
+  let match;
+  while ((match = regex.exec(input)) !== null) {
+    if (match[1]) {
+      // If the first capturing group (Arabic words) matches
+      result.push({ word: match[1], type: "word" });
+    } else if (match[2]) {
+      // If the second capturing group (Arabic question mark) matches
+      result.push({ word: match[2], type: "word" });
+    } else if (match[3]) {
+      // If the third capturing group (separators including spaces) matches
+      result.push({ word: match[3], type: "separator" });
+    }
+  }
+
+  return result;
+}
+
 function preProcessInput(input: string): string {
   return input.replace(/( ً| ُ| ٌ| ِ| ٍ| ّ )/g, "");
 }
@@ -44,7 +73,7 @@ const adaptLastHebrewLetter = (word: string): string => {
     ["צ", "ץ"],
   ]);
 
-  let newLastLetter; 
+  let newLastLetter;
   if (word.endsWith("כּ")) {
     word = word.slice(0, -2);
     newLastLetter = "ךּ";
@@ -52,6 +81,6 @@ const adaptLastHebrewLetter = (word: string): string => {
     newLastLetter = lastLetterMapping.get(lastLetter) || lastLetter;
     word = word.slice(0, -1);
   }
-  
+
   return word.concat(newLastLetter);
 };

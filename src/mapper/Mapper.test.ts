@@ -77,6 +77,13 @@ describe("mapArabicToHebrewLettersValidMaps", () => {
       arabic: "كان ُ ي ُا مكان ف ًي قد ًيم الزم ًان",
       hebrew: "כּאן יא מכּאן פי קדים אלזמאן",
     },
+    {
+      id: 21,
+      description:
+        "Words in Hebrew should end with end-form letter (ם, ן, ף, ץ) even with pancuations",
+      arabic: "كان؟ يا. مكان؛ في/ قديم الزمان",
+      hebrew: "כּאן? יא. מכּאן؛ פי/ קדים אלזמאן",
+    },
   ];
 
   expectedMappings.forEach((mapping) => {
