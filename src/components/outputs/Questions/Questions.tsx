@@ -1,7 +1,9 @@
 import useQuestions from "../../../hooks/useQuestions";
-import { Spinner, VStack, Text, HStack, Stack } from "@chakra-ui/react";
+import { Spinner, VStack, Text, Button } from "@chakra-ui/react";
 
 import SingleQuestion from "./SingleQuestion";
+import { useState } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 interface QuestionsProps {
   arabicText: string;
@@ -10,6 +12,7 @@ interface QuestionsProps {
 
 const Questions = ({ arabicText, questionsAgain }: QuestionsProps) => {
   const { data, error, loading } = useQuestions(arabicText, questionsAgain);
+  const [ questionIndex, setQuestionIndex ]= useState(0);
   if (error) {
     return <div>{error}</div>;
   }
@@ -27,7 +30,9 @@ const Questions = ({ arabicText, questionsAgain }: QuestionsProps) => {
         data.questions.map((q, index) => {
           return <SingleQuestion question={q} key={index} />;
         })}
-      <SingleQuestion question={data.questions[0]} />
+      <SingleQuestion question={data.questions[questionIndex]} />
+      <Button isDisabled={questionIndex === 0} leftIcon={<FaArrowRight />} variant="outline"  colorScheme='teal' onClick={() => setQuestionIndex((questionIndex - 1))}>הקודם</Button>
+      <Button isDisabled={questionIndex === data.questions.length - 1} rightIcon={<FaArrowLeft />} variant="outline"  colorScheme='teal' onClick={() => setQuestionIndex((questionIndex + 1))}>הבא</Button>
     </div>
   );
 };

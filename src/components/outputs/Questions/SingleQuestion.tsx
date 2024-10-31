@@ -15,6 +15,8 @@ interface SingleQuestionProps {
 }
 
 const SingleQuestion = ({ question }: SingleQuestionProps) => {
+  if (!question) return;
+  if (!question.question_in_arabic) return;
   return (
     <Card>
       <CardHeader>
@@ -28,7 +30,9 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
               תרגום השאלה:
             </Heading>
             <Text pt="2" fontSize="sm">
-              {question.question_in_hebrew}
+              {question.question_in_hebrew !== null
+                ? question.question_in_hebrew
+                : ""}
             </Text>
           </Box>
           <Box>
@@ -36,7 +40,9 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
               תשובה בערבית:
             </Heading>
             <Text pt="2" fontSize="sm">
-              {question.answer_in_arabic}
+              {question.answer_in_arabic !== null
+                ? question.answer_in_arabic
+                : ""}
             </Text>
           </Box>
           <Box>
@@ -44,7 +50,9 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
               תרגום התשובה לעברית:
             </Heading>
             <Text pt="2" fontSize="sm">
-              {question.answer_in_hebrew}
+              {question.answer_in_hebrew !== null
+                ? question.answer_in_hebrew
+                : ""}
             </Text>
           </Box>
         </Stack>
