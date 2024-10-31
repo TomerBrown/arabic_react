@@ -8,9 +8,8 @@ function App() {
 
   const [arabicText, setArabicText] = useState<string>('');
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
     setArabicText(e.target.value);
-  }
+  };
   return (
     <ChakraProvider>
       <Heading className="title">לומדים ערבית עם יפתח ותומר</Heading>

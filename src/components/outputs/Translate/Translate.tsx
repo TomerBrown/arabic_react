@@ -1,4 +1,5 @@
 import useTranslate from "../../../hooks/useTranslate";
+import { Spinner, VStack, Text } from "@chakra-ui/react";
 
 interface TranslateProps {
   arabicText: string;
@@ -12,7 +13,12 @@ const Translate = ({ arabicText, translateAgain }: TranslateProps) => {
     return <div>{error}</div>;
   }
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <VStack>
+        <Spinner color="colorPalette.600" />
+        <Text color="colorPalette.600">Loading...</Text>
+      </VStack>
+    );
   }
   return <div>{data.translated_text}</div>;
 };

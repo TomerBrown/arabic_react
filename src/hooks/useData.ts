@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import apiClient from "../services/apiClient";
 import { AxiosRequestConfig, CanceledError } from "axios";
 
@@ -20,12 +20,11 @@ const useData = <T>(
           ...requestConfig,
           signal: controller.signal,
         })
-        .then((response) => {
-          console.log(response);
+        .then((response: { data: T; }) => {
           setData(response.data as T);
           setLoading(false);
         })
-        .catch((error) => {
+        .catch((error: { message: SetStateAction<string>; }) => {
           if (error instanceof CanceledError) {
             return;
           }

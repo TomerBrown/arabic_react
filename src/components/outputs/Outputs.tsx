@@ -3,12 +3,14 @@ import { mapArabicToHebrewLetters } from "../../mapper/Mapper";
 import Taatic from "./Taatic";
 import Translate from "./Translate/Translate";
 import { useState } from "react";
+import Questions from "./Questions/Questions";
 interface OutputsProps {
   arabicText: string;
 }
 
 const Outputs = ({ arabicText }: OutputsProps) => {
   const [translateAgain, setTranslateAgain] = useState(false);
+  const [questionsAgain, setQuestionsAgain] = useState(false);
 
   return (
     <Tabs isFitted variant="enclosed" dir="rtl">
@@ -21,7 +23,7 @@ const Outputs = ({ arabicText }: OutputsProps) => {
         >
           תרגום
         </Tab>
-        <Tab>שאלות</Tab>
+        <Tab onClick={() => setQuestionsAgain(!questionsAgain)}>שאלות</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -37,7 +39,13 @@ const Outputs = ({ arabicText }: OutputsProps) => {
           )}
         </TabPanel>
         <TabPanel>
-          <p>שלוש</p>
+          {arabicText === "" && <div>אנא הכנס טקסט לתרגום</div>}
+          {arabicText !== "" && (
+            <Questions
+              arabicText={arabicText}
+              questionsAgain={questionsAgain}
+            />
+          )}
         </TabPanel>
       </TabPanels>
     </Tabs>
