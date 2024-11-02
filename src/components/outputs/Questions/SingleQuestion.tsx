@@ -1,4 +1,5 @@
 import { SingleQuestion as Question } from "../../../hooks/useQuestions";
+import { mapArabicToHebrewLetters } from "../../../mapper/Mapper";
 import {
   Card,
   CardBody,
@@ -21,6 +22,9 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
     <Card>
       <CardHeader>
         <Heading size="lg">{question.question_in_arabic}</Heading>
+        <Heading size="md">
+          {mapArabicToHebrewLetters(question.question_in_arabic)}
+        </Heading>
       </CardHeader>
 
       <CardBody>
@@ -42,6 +46,11 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
             <Text pt="2" fontSize="sm">
               {question.answer_in_arabic !== null
                 ? question.answer_in_arabic
+                : ""}
+            </Text>
+            <Text pt="2" fontSize="sm">
+              {question.answer_in_arabic !== null
+                ? mapArabicToHebrewLetters(question.answer_in_arabic)
                 : ""}
             </Text>
           </Box>
