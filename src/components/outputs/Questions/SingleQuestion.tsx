@@ -10,8 +10,6 @@ import {
   CardBody,
   CardHeader,
   Heading,
-  Stack,
-  StackDivider,
   Text,
   Box,
 } from "@chakra-ui/react";
@@ -19,6 +17,36 @@ import {
 interface SingleQuestionProps {
   question: Question;
 }
+
+const getAccordionItems = (
+  title: string,
+  content: string,
+  secondaryContent?: string
+) => {
+  if (content === null || content === "") return;
+  return (
+    <AccordionItem>
+      <h2>
+        <AccordionButton>
+          <Box as="span" flex="1" textAlign="right">
+            {title}
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
+      </h2>
+      <AccordionPanel pb={4}>
+        <Text pt="2" fontSize="sm">
+          {content}
+        </Text>
+        {secondaryContent && (
+          <Text pt="2" fontSize="sm">
+            {secondaryContent}
+          </Text>
+        )}
+      </AccordionPanel>
+    </AccordionItem>
+  );
+};
 
 const SingleQuestion = ({ question }: SingleQuestionProps) => {
   if (!question) return;
@@ -34,63 +62,13 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
 
       <CardBody>
         <Accordion allowMultiple={true}>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="right">
-                  תרגום השאלה:
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              <Text pt="2" fontSize="sm">
-                {question.question_in_hebrew !== null
-                  ? question.question_in_hebrew
-                  : ""}
-              </Text>
-            </AccordionPanel>
-          </AccordionItem>
-
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="right">
-                  התשובה בערבית:
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              <Text pt="2" fontSize="sm">
-                {question.answer_in_arabic !== null
-                  ? question.answer_in_arabic
-                  : ""}
-              </Text>
-              <Text pt="2" fontSize="sm">
-                {question.answer_in_arabic !== null
-                  ? mapArabicToHebrewLetters(question.answer_in_arabic)
-                  : ""}
-              </Text>
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="right">
-                  תרגום התשובה לעברית:
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              <Text pt="2" fontSize="sm">
-                {question.answer_in_hebrew !== null
-                  ? question.answer_in_hebrew
-                  : ""}
-              </Text>
-            </AccordionPanel>
-          </AccordionItem>
+          {getAccordionItems("תרגום השאלה:", question.question_in_hebrew)}
+          {getAccordionItems(
+            "התשובה בערבית:",
+            question.answer_in_arabic,
+            mapArabicToHebrewLetters(question.answer_in_arabic)
+          )}
+          {getAccordionItems("התשובה בעברית:", question.answer_in_hebrew)}
         </Accordion>
       </CardBody>
     </Card>
