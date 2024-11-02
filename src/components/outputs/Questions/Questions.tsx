@@ -12,7 +12,7 @@ interface QuestionsProps {
 
 const Questions = ({ arabicText, questionsAgain }: QuestionsProps) => {
   const { data, error, loading } = useQuestions(arabicText, questionsAgain);
-  const [ questionIndex, setQuestionIndex ]= useState(0);
+  const [questionIndex, setQuestionIndex] = useState(0);
   if (error) {
     return <div>{error}</div>;
   }
@@ -26,13 +26,31 @@ const Questions = ({ arabicText, questionsAgain }: QuestionsProps) => {
   }
   return (
     <div>
-      {false &&
-        data.questions.map((q, index) => {
-          return <SingleQuestion question={q} key={index} />;
-        })}
-      <SingleQuestion question={data.questions[questionIndex]} />
-      <Button isDisabled={questionIndex === 0} leftIcon={<FaArrowRight />} variant="outline"  colorScheme='teal' onClick={() => setQuestionIndex((questionIndex - 1))}>הקודם</Button>
-      <Button isDisabled={questionIndex === data.questions.length - 1} rightIcon={<FaArrowLeft />} variant="outline"  colorScheme='teal' onClick={() => setQuestionIndex((questionIndex + 1))}>הבא</Button>
+      {data.questions.map((question, index) => (
+        <SingleQuestion
+          question={question}
+          index={index}
+          visible={index === questionIndex}
+        />
+      ))}
+      <Button
+        isDisabled={questionIndex === 0}
+        leftIcon={<FaArrowRight />}
+        variant="outline"
+        colorScheme="teal"
+        onClick={() => setQuestionIndex(questionIndex - 1)}
+      >
+        הקודם
+      </Button>
+      <Button
+        isDisabled={questionIndex === data.questions.length - 1}
+        rightIcon={<FaArrowLeft />}
+        variant="outline"
+        colorScheme="teal"
+        onClick={() => setQuestionIndex(questionIndex + 1)}
+      >
+        הבא
+      </Button>
     </div>
   );
 };

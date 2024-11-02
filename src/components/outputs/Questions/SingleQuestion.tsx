@@ -16,6 +16,8 @@ import {
 
 interface SingleQuestionProps {
   question: Question;
+  index: number;
+  visible?: boolean;
 }
 
 const getAccordionItems = (
@@ -27,19 +29,21 @@ const getAccordionItems = (
   return (
     <AccordionItem>
       <h2>
-        <AccordionButton>
+        <AccordionButton
+          _expanded={{ bg: "teal.600", color: "white", fontWeight: "bold" }}
+        >
           <Box as="span" flex="1" textAlign="right">
             {title}
           </Box>
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4}>
-        <Text pt="2" fontSize="sm">
+      <AccordionPanel pb={4} bg={"gray.100"}>
+        <Text pt="2" fontSize="md">
           {content}
         </Text>
         {secondaryContent && (
-          <Text pt="2" fontSize="sm">
+          <Text pt="2" fontSize="md">
             {secondaryContent}
           </Text>
         )}
@@ -48,9 +52,10 @@ const getAccordionItems = (
   );
 };
 
-const SingleQuestion = ({ question }: SingleQuestionProps) => {
+const SingleQuestion = ({ question, index, visible }: SingleQuestionProps) => {
   if (!question) return;
   if (!question.question_in_arabic) return;
+  if (!visible) return;
   return (
     <Card>
       <CardHeader>
@@ -61,7 +66,10 @@ const SingleQuestion = ({ question }: SingleQuestionProps) => {
       </CardHeader>
 
       <CardBody>
-        <Accordion allowMultiple={true}>
+        <Accordion
+          allowMultiple={true}
+          id={"QuestionsAccordion" + index.toString()}
+        >
           {getAccordionItems("תרגום השאלה:", question.question_in_hebrew)}
           {getAccordionItems(
             "התשובה בערבית:",
