@@ -6,6 +6,7 @@ interface TranslatedText {
 }
 
 const useYoutube = (url: string, youtubeAgain: boolean) => {
+  console.log("url: ", url);
   return useData<TranslatedText>(
     "/youtube/",
     {

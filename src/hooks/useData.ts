@@ -23,6 +23,7 @@ const useData = <T>(
         .then((response: { data: T; }) => {
           setData(response.data as T);
           setLoading(false);
+          setError("");
         })
         .catch((error: { message: SetStateAction<string>; }) => {
           if (error instanceof CanceledError) {

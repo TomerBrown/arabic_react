@@ -17,15 +17,31 @@ interface YoutubeProps {
   setArabicText: (text: string) => void;
 }
 
+function isValidYoutubeUrlWithVParam(url: string): boolean {
+  if (url === "") return true;
+  // Regular expression to match YouTube URLs with the 'v' parameter
+  const youtubeRegex =
+    /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?(?:.+&)?v=|(?:embed\/|v\/))|youtu\.be\/)([^&]+)/;
+
+  // Check if the URL matches the YouTube pattern
+  if (!youtubeRegex.test(url)) {
+    return false;
+  }
+
+  // Check if the URL contains the 'v' parameter
+  return url.includes("v=");
+}
+
 const Youtube = ({ setArabicText }: YoutubeProps) => {
   const [url, setUrl] = useState("");
   const [youtubeAgain, setYoutubeAgain] = useState(false);
   const { data, error, loading } = useYoutube(url, youtubeAgain);
   const handleSubmit = () => {
     setYoutubeAgain(!youtubeAgain);
-    if (data) {
+    if (data && !error) {
       setArabicText(data.arabic_text);
     }
+    console.log(error);
   };
   return (
     <Box>
@@ -34,7 +50,12 @@ const Youtube = ({ setArabicText }: YoutubeProps) => {
         <Stack direction="row" alignItems="center">
           {loading && <Spinner color="red" />}
           {!loading && (
-            <Button colorScheme="red" ml={2} onClick={handleSubmit}>
+            <Button
+              colorScheme="red"
+              ml={2}
+              onClick={handleSubmit}
+              isDisabled={!isValidYoutubeUrlWithVParam(url) || url === ""}
+            >
               הבא טקסט
             </Button>
           )}
@@ -45,7 +66,10 @@ const Youtube = ({ setArabicText }: YoutubeProps) => {
               placeholder="הכנס לינק ליוטיוב"
               value={url}
               width={"70vw"}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={(e) => {
+                setUrl(e.target.value);
+              }}
+              isInvalid={isValidYoutubeUrlWithVParam(url) ? false : true}
             />
             <InputLeftElement pointerEvents="none">
               <FaYoutube color="red" />
