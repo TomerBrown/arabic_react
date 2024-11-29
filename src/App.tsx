@@ -13,7 +13,7 @@ function App() {
   return (
     <ChakraProvider>
       <Heading className="title">לומדים ערבית עם יפתח ותומר</Heading>
-      <InputText arabicText={arabicText} handleOnChange={handleInputChange} />
+      <InputText arabicText={arabicText} setArabicText={setArabicText}handleOnChange={handleInputChange} />
       <Outputs arabicText={arabicText}/>
     </ChakraProvider>
   )
