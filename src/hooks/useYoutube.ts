@@ -5,7 +5,7 @@ interface TranslatedText {
   type: string;
 }
 
-const useYoutube = (url: string) => {
+const useYoutube = (url: string, youtubeAgain: boolean) => {
   return useData<TranslatedText>(
     "/youtube/",
     {
@@ -16,7 +16,7 @@ const useYoutube = (url: string) => {
         "Content-Type": "application/json",
       },
     },
-    []
+    [youtubeAgain]
   );
 };
 

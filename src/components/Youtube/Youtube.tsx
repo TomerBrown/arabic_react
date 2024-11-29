@@ -10,9 +10,7 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
-  VStack,
   Spinner,
-  Text,
 } from "@chakra-ui/react";
 
 interface YoutubeProps {
@@ -21,26 +19,25 @@ interface YoutubeProps {
 
 const Youtube = ({ setArabicText }: YoutubeProps) => {
   const [url, setUrl] = useState("");
-  const { data, error, loading } = useYoutube(url);
-  if (loading) {
-    return (
-      <VStack>
-        <Spinner color="colorPalette.600" />
-        <Text color="colorPalette.600">Loading...</Text>
-      </VStack>
-    );
-  }
+  const [youtubeAgain, setYoutubeAgain] = useState(false);
+  const { data, error, loading } = useYoutube(url, youtubeAgain);
   const handleSubmit = () => {
-    setArabicText(data.arabic_text);
+    setYoutubeAgain(!youtubeAgain);
+    if (data) {
+      setArabicText(data.arabic_text);
+    }
   };
   return (
     <Box>
       <FormControl>
         <FormLabel htmlFor="youtubeUrl"></FormLabel>
         <Stack direction="row" alignItems="center">
-          <Button colorScheme="red" ml={2} onClick={handleSubmit}>
-            הבא טקסט
-          </Button>
+          {loading && <Spinner color="red" />}
+          {!loading && (
+            <Button colorScheme="red" ml={2} onClick={handleSubmit}>
+              הבא טקסט
+            </Button>
+          )}
           <InputGroup size="md">
             <Input
               id="youtubeUrl"
