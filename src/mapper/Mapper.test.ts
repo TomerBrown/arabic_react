@@ -74,8 +74,8 @@ describe("mapArabicToHebrewLettersValidMaps", () => {
     {
       id: 20,
       description: "Diacritics should be ignored",
-      arabic: "كان ُ ي ُا مكان ف ًي قد ًيم الزم ًان",
-      hebrew: "כּאן יא מכּאן פי קדים אלזמאן",
+      arabic: "ما بكَ يا صغيري؟ لِمَ تبكي؟",
+      hebrew: "מא בּךּ יא צע'ירי? לם תבּכּי?",
     },
     {
       id: 21,
