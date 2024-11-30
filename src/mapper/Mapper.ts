@@ -38,8 +38,12 @@ function splitArabicSentence(input: string): { word: string; type: string }[] {
   return result;
 }
 
+function removeTashkeelAll(s: string): string {
+  return s.replace(/[ؐ-ًؕ-ٖٓ-ٟۖ-ٰٰۭ]/g, "");
+}
+
 function preProcessInput(input: string): string {
-  return input.replace(/( ً| ُ| ٌ| ِ| ٍ| ّ )/g, "");
+  return removeTashkeelAll(input);
 }
 
 function mapWord(word: string): string {
