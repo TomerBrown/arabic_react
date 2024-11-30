@@ -40,7 +40,7 @@ const Youtube = ({ setArabicText }: YoutubeProps) => {
     setYoutubeAgain(!youtubeAgain);
   };
   return (
-    <Box>
+    <Box width={"100%"}>
       <FormControl>
         <FormLabel htmlFor="youtubeUrl"></FormLabel>
         <Stack direction="row" alignItems="center">
@@ -51,6 +51,7 @@ const Youtube = ({ setArabicText }: YoutubeProps) => {
               ml={2}
               onClick={handleSubmit}
               isDisabled={!isValidYoutubeUrlWithVParam(url) || url === ""}
+              flexShrink={0}
             >
               הבא טקסט
             </Button>
@@ -61,11 +62,11 @@ const Youtube = ({ setArabicText }: YoutubeProps) => {
               type="text"
               placeholder="הכנס לינק ליוטיוב"
               value={url}
-              width={"70vw"}
               onChange={(e) => {
                 setUrl(e.target.value);
               }}
               isInvalid={isValidYoutubeUrlWithVParam(url) ? false : true}
+              flexGrow={1}
             />
             <InputLeftElement pointerEvents="none">
               <FaYoutube color="red" />
