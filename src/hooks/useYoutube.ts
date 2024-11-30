@@ -5,8 +5,11 @@ interface TranslatedText {
   type: string;
 }
 
-const useYoutube = (url: string, youtubeAgain: boolean) => {
-  console.log("url: ", url);
+const useYoutube = (
+  url: string,
+  setArabicText: (text: string) => void,
+  youtubeAgain: boolean
+) => {
   return useData<TranslatedText>(
     "/youtube/",
     {
@@ -17,7 +20,11 @@ const useYoutube = (url: string, youtubeAgain: boolean) => {
         "Content-Type": "application/json",
       },
     },
-    [youtubeAgain]
+    [youtubeAgain],
+    (data: TranslatedText) => {
+      console.log("data: ", data);
+      setArabicText(data.arabic_text);
+    }
   );
 };
 

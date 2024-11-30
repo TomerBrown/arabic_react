@@ -35,13 +35,9 @@ function isValidYoutubeUrlWithVParam(url: string): boolean {
 const Youtube = ({ setArabicText }: YoutubeProps) => {
   const [url, setUrl] = useState("");
   const [youtubeAgain, setYoutubeAgain] = useState(false);
-  const { data, error, loading } = useYoutube(url, youtubeAgain);
+  const { loading } = useYoutube(url, setArabicText, youtubeAgain);
   const handleSubmit = () => {
     setYoutubeAgain(!youtubeAgain);
-    if (data && !error) {
-      setArabicText(data.arabic_text);
-    }
-    console.log(error);
   };
   return (
     <Box>

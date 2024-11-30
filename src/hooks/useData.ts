@@ -5,7 +5,8 @@ import { AxiosRequestConfig, CanceledError } from "axios";
 const useData = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
-  deps?: unknown[]
+  deps?: unknown[],
+  onSuccess?: (data: T) => void
 ) => {
   const [data, setData] = useState<T>({} as T);
   const [error, setError] = useState<string>("");
@@ -20,12 +21,13 @@ const useData = <T>(
           ...requestConfig,
           signal: controller.signal,
         })
-        .then((response: { data: T; }) => {
+        .then((response: { data: T }) => {
           setData(response.data as T);
+          data && onSuccess && onSuccess(response.data as T);
           setLoading(false);
           setError("");
         })
-        .catch((error: { message: SetStateAction<string>; }) => {
+        .catch((error: { message: SetStateAction<string> }) => {
           if (error instanceof CanceledError) {
             return;
           }
