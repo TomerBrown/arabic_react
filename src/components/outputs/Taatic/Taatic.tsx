@@ -1,26 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import OutputBox from "../OutputBox/OutputBox";
 
 interface TaaticProps {
-    text: string
+  text: string;
 }
 
-const Taatic = ({text}: TaaticProps) => {
-  return (
-    <Box
-    as="div"
-    p={2}
-    borderWidth="1px"
-    borderRadius="md"
-    bg="white"
-    height="150px"
-    overflowY="auto"
-    whiteSpace="pre-wrap"
-    cursor="text"
-    userSelect="text"
-  >
-    {text}
-  </Box>
-  );
+const Taatic = ({ text }: TaaticProps) => {
+  return <OutputBox text={text} badgeColor="purple" badgeTitle="תעתיק"/>;
 };
 
 export default Taatic;

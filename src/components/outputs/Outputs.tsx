@@ -34,6 +34,7 @@ const Outputs = ({ arabicText }: OutputsProps) => {
           {arabicText !== "" && (
             <Translate
               arabicText={arabicText}
+              taaticText={mapArabicToHebrewLetters(arabicText)}
               translateAgain={translateAgain}
             />
           )}
