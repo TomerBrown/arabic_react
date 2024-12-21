@@ -12,6 +12,7 @@ import {
   Heading,
   Text,
   Box,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 interface SingleQuestionProps {
@@ -23,6 +24,7 @@ interface SingleQuestionProps {
 const getAccordionItems = (
   title: string,
   content: string,
+  bg: string,
   secondaryContent?: string
 ) => {
   if (content === null || content === "") return;
@@ -38,7 +40,7 @@ const getAccordionItems = (
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4} bg={"gray.100"}>
+      <AccordionPanel pb={4} bg={bg}>
         <Text pt="2" fontSize="md">
           {content}
         </Text>
@@ -53,6 +55,7 @@ const getAccordionItems = (
 };
 
 const SingleQuestion = ({ question, index, visible }: SingleQuestionProps) => {
+  const bg = useColorModeValue("teal.200", "teal.900");
   if (!question) return;
   if (!question.question_in_arabic) return;
   if (!visible) return;
@@ -70,13 +73,14 @@ const SingleQuestion = ({ question, index, visible }: SingleQuestionProps) => {
           allowMultiple={true}
           id={"QuestionsAccordion" + index.toString()}
         >
-          {getAccordionItems("תרגום השאלה:", question.question_in_hebrew)}
+          {getAccordionItems("תרגום השאלה:", question.question_in_hebrew, bg)}
           {getAccordionItems(
             "התשובה בערבית:",
             question.answer_in_arabic,
+            bg,
             mapArabicToHebrewLetters(question.answer_in_arabic)
           )}
-          {getAccordionItems("התשובה בעברית:", question.answer_in_hebrew)}
+          {getAccordionItems("התשובה בעברית:", question.answer_in_hebrew, bg)}
         </Accordion>
       </CardBody>
     </Card>
