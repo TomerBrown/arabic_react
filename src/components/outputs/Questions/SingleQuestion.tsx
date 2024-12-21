@@ -55,7 +55,7 @@ const getAccordionItems = (
 };
 
 const SingleQuestion = ({ question, index, visible }: SingleQuestionProps) => {
-  const bg = useColorModeValue("teal.200", "teal.900");
+  const bg = useColorModeValue("gray.200", "teal.900");
   if (!question) return;
   if (!question.question_in_arabic) return;
   if (!visible) return;

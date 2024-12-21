@@ -1,4 +1,9 @@
-import { FormControl, FormLabel, Switch, useColorMode } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Switch,
+  useColorMode,
+} from "@chakra-ui/react";
 
 const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -13,8 +18,6 @@ const ThemeToggle = () => {
         size={"sm"}
         colorScheme="teal"
         isChecked={colorMode === "dark"}
-        flexShrink={0}
-        width="fit-content"
       />
     </FormControl>
   );

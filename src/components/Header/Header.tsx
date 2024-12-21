@@ -1,15 +1,16 @@
-import { Heading, HStack } from '@chakra-ui/react'
+import { Heading, VStack } from '@chakra-ui/react'
 
 import ThemeToggle from './ThemeToggle'
 
 const Header = () => {
   return (
-    <HStack>
+
+    <VStack>
+    <ThemeToggle />
     <Heading className="title" flexGrow={1} >
       לומדים ערבית עם יפתח ותומר
     </Heading>
-    <ThemeToggle />
-  </HStack>
+  </VStack>
   )
 }
 
