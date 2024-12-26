@@ -1,13 +1,7 @@
-import useTranslate from "../../../hooks/useTranslate";
-import {
-  Spinner,
-  VStack,
-  Text,
-  HStack,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { VStack, HStack, useBreakpointValue } from "@chakra-ui/react";
 import Taatic from "../Taatic/Taatic";
-import OutputBox from "../OutputBox/OutputBox";
+import TranslationBox from "./TranslationBox";
+
 interface TranslateProps {
   arabicText: string;
   taaticText: string;
@@ -19,34 +13,30 @@ const Translate = ({
   taaticText,
   translateAgain,
 }: TranslateProps) => {
-  const { data, error, loading } = useTranslate(arabicText, translateAgain);
   const Stack =
     useBreakpointValue({
       base: VStack, // Use VStack for narrow screens
       md: HStack, // Use HStack for medium and larger screens
     }) || VStack;
 
-  if (error) {
-    console.error(error);
-    return <div>{error}</div>;
-  }
-  if (loading) {
-    return (
-      <VStack>
-        <Spinner color="colorPalette.600" />
-        <Text color="colorPalette.600">Loading...</Text>
-      </VStack>
-    );
-  }
-
   return (
     <Stack gap={4} p={12}>
-      <OutputBox
-        badgeColor="blue"
-        badgeTitle="תרגום"
-        text={data.translated_text}
-      />
-      ;
+      <VStack width={"100%"}>
+        <TranslationBox
+          arabicText={arabicText}
+          translateAgain={translateAgain}
+          color={"yellow"}
+          model="ms"
+          key={"ms"}
+        />
+        <TranslationBox
+          arabicText={arabicText}
+          translateAgain={translateAgain}
+          color={"green"}
+          model="gpt"
+          key={"gpt"}
+        />
+      </VStack>
       <Taatic text={taaticText} />;
     </Stack>
   );

@@ -4,7 +4,7 @@ interface TranslatedText {
   translated_text: string;
 }
 
-const useTranslate = (arabic_text: string, translateAgain: boolean) => {
+const useTranslate = (arabic_text: string, translateAgain: boolean, model: string) => {
   return useData<TranslatedText>(
     "/translate/",
     {
@@ -12,6 +12,7 @@ const useTranslate = (arabic_text: string, translateAgain: boolean) => {
       maxBodyLength: Infinity,
       data: {
         text: arabic_text,
+        model: model
       },
       headers: {
         "Content-Type": "application/json",
