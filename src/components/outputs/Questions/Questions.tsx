@@ -30,6 +30,7 @@ const Questions = ({ arabicText, questionsAgain }: QuestionsProps) => {
         <SingleQuestion
           question={question}
           index={index}
+          key={index}
           visible={index === questionIndex}
         />
       ))}
