@@ -23,7 +23,7 @@ const TranslationBox = ({
   const { data, error, loading } = useTranslate(
     arabicText,
     translateAgain,
-    "ms"
+    model
   );
 
   if (error) {
