@@ -4,19 +4,24 @@ import NotFoundPage from "../Pages/NotFoundPage";
 import YoutubeVideoPage from "../Pages/YoutubeVideoPage";
 import { HOMEPATH, YOUTUBEPATH } from "./routes";
 
+const CreatePageRouter = (
+  arabicText: string,
+  setArabicText: (text: string) => void
+) => {
+  return createBrowserRouter([
+    {
+      path: HOMEPATH,
+      element: (
+        <MainPage arabicText={arabicText} setArabicText={setArabicText} />
+      ),
+      errorElement: <NotFoundPage />,
+    },
+    {
+      path: YOUTUBEPATH,
+      element: <YoutubeVideoPage setArabicText={setArabicText} />,
+      errorElement: <NotFoundPage />,
+    },
+  ]);
+};
 
-const pageRouter = createBrowserRouter([
-  {
-    path: HOMEPATH,
-    element: <MainPage />,
-    errorElement: <NotFoundPage />,
-  },
-  {
-    path: YOUTUBEPATH,
-    element: <YoutubeVideoPage />,
-    errorElement: <NotFoundPage />,
-  },
-]);
-
-
-export default pageRouter;
+export default CreatePageRouter;

@@ -1,9 +1,16 @@
 import TemplatePage from "./TemplatePage";
+import Youtube from "../components/Youtube/Youtube";
 
-const YoutubeVideoPage = () => {
+interface YoutubeVideoPageProps {
+    setArabicText: (text: string) => void;
+}
+
+const YoutubeVideoPage = ( {setArabicText}: YoutubeVideoPageProps) => {
   return (
     <div>
-      <TemplatePage>YoutubeVideoPage</TemplatePage>
+      <TemplatePage>
+        <Youtube setArabicText={setArabicText} />
+      </TemplatePage>
     </div>
   );
 };

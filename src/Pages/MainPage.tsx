@@ -1,11 +1,14 @@
 import InputText from "../components/InputText/InputText";
 import Outputs from "../components/outputs/Outputs";
 
-import { useState } from "react";
 import TemplatePage from "./TemplatePage";
 
-const MainPage = () => {
-  const [arabicText, setArabicText] = useState<string>("");
+interface MainPageProps {
+  arabicText: string;
+  setArabicText: (text: string) => void;
+}
+
+const MainPage = ({arabicText, setArabicText}: MainPageProps) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setArabicText(e.target.value);
