@@ -1,24 +1,21 @@
-import { ChakraProvider} from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
-import InputText from "./components/InputText/InputText";
-import Outputs from "./components/outputs/Outputs";
-import { useState } from "react";
-import Header from "./components/Header/Header";
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainPage from "./components/Pages/mainPage";
+import NotFoundPage from "./components/Pages/NotFoundPage";
 function App() {
-  const [arabicText, setArabicText] = useState<string>("");
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setArabicText(e.target.value);
-  };
+  const router = createBrowserRouter([
+    {
+      path: "/arabic_react",
+      element: <MainPage />,
+      // TODO(Tomerbrown): Add a 404 page that looks better!
+      errorElement: <NotFoundPage />,
+    },
+  ]);
   return (
     <ChakraProvider>
-      <Header />
-      <InputText
-        arabicText={arabicText}
-        setArabicText={setArabicText}
-        handleOnChange={handleInputChange}
-      />
-      <Outputs arabicText={arabicText} />
+      <RouterProvider router={router} />
     </ChakraProvider>
   );
 }
