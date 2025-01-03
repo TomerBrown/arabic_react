@@ -1,8 +1,8 @@
 import InputText from "../components/InputText/InputText";
 import Outputs from "../components/outputs/Outputs";
-import Header from "../components/Header/Header";
 
 import { useState } from "react";
+import TemplatePage from "./TemplatePage";
 
 const MainPage = () => {
   const [arabicText, setArabicText] = useState<string>("");
@@ -11,15 +11,14 @@ const MainPage = () => {
     setArabicText(e.target.value);
   };
   return (
-    <>
-      <Header />
+    <TemplatePage>
       <InputText
         arabicText={arabicText}
         setArabicText={setArabicText}
         handleOnChange={handleInputChange}
       />
       <Outputs arabicText={arabicText} />
-    </>
+    </TemplatePage>
   );
 };
 
