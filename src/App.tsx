@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 
 import { RouterProvider } from "react-router-dom";
-import pageRouter from "./pageRouter";
+import pageRouter from "./router/pageRouter";
 
 function App() {
   return (

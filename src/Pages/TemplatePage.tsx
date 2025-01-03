@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header/Header";
+import { Box } from "@chakra-ui/react";
 
 interface TemplatePageProps {
   children?: React.ReactNode;
@@ -7,10 +8,10 @@ interface TemplatePageProps {
 
 const TemplatePage = ({ children }: TemplatePageProps) => {
   return (
-    <div>
+    <Box padding={"20px"}>
       <Header />
       {children}
-    </div>
+    </Box>
   );
 };
 
