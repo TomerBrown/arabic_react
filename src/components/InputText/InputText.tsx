@@ -1,18 +1,15 @@
 import { Tag, Textarea } from "@chakra-ui/react";
-import Youtube from "../Youtube/Youtube";
 import "./InputText.css";
 
 interface InputTextProps {
   arabicText: string;
   setArabicText: (text: string) => void;
   handleOnChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  url: string;
+  setUrl: (url: string) => void;
 }
 
-const InputText = ({
-  arabicText,
-  setArabicText,
-  handleOnChange,
-}: InputTextProps) => {
+const InputText = ({ arabicText, handleOnChange }: InputTextProps) => {
   return (
     <div className="components-container">
       <Tag key="label" variant="subtle" colorScheme="teal" size="md" mb="15px;">
@@ -27,7 +24,6 @@ const InputText = ({
         onChange={handleOnChange}
         placeholder="أدخل النص بالعربية..."
       ></Textarea>
-      <Youtube setArabicText={setArabicText} />
     </div>
   );
 };

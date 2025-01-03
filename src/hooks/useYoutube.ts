@@ -22,7 +22,6 @@ const useYoutube = (
     },
     [youtubeAgain],
     (data: TranslatedText) => {
-      console.log("data: ", data);
       setArabicText(data.arabic_text);
     }
   );

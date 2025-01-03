@@ -7,7 +7,14 @@ import CreatePageRouter from "./router/pageRouter";
 
 function App() {
   const [arabicText, setArabicText] = useState<string>("");
-  const pageRouter = CreatePageRouter(arabicText, setArabicText);
+  const [youtubeUrl, setYoutubeUrl] = useState<string>("");
+
+  const pageRouter = CreatePageRouter(
+    arabicText,
+    setArabicText,
+    youtubeUrl,
+    setYoutubeUrl
+  );
   return (
     <ChakraProvider>
       <RouterProvider router={pageRouter} />

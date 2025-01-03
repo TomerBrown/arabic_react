@@ -15,6 +15,10 @@ import {
 
 interface YoutubeProps {
   setArabicText: (text: string) => void;
+  url: string;
+  setUrl: (url: string) => void;
+  handleSubmit?: () => void;
+  buttonText?: string;
 }
 
 function isValidYoutubeUrlWithVParam(url: string): boolean {
@@ -32,11 +36,16 @@ function isValidYoutubeUrlWithVParam(url: string): boolean {
   return url.includes("v=");
 }
 
-const Youtube = ({ setArabicText }: YoutubeProps) => {
-  const [url, setUrl] = useState("");
+const Youtube = ({
+  setArabicText,
+  url,
+  setUrl,
+  handleSubmit,
+  buttonText,
+}: YoutubeProps) => {
   const [youtubeAgain, setYoutubeAgain] = useState(false);
   const { loading } = useYoutube(url, setArabicText, youtubeAgain);
-  const handleSubmit = () => {
+  const defaultHandleSubmit = () => {
     setYoutubeAgain(!youtubeAgain);
   };
   return (
@@ -49,11 +58,16 @@ const Youtube = ({ setArabicText }: YoutubeProps) => {
             <Button
               colorScheme="red"
               ml={2}
-              onClick={handleSubmit}
+              onClick={() => {
+                defaultHandleSubmit();
+                if (handleSubmit) {
+                  handleSubmit();
+                }
+              }}
               isDisabled={!isValidYoutubeUrlWithVParam(url) || url === ""}
               flexShrink={0}
             >
-              הבא טקסט
+              {buttonText}
             </Button>
           )}
           <InputGroup size="md">
