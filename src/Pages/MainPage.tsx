@@ -1,6 +1,6 @@
-import InputText from "../InputText/InputText";
-import Outputs from "../outputs/Outputs";
-import Header from "../Header/Header";
+import InputText from "../components/InputText/InputText";
+import Outputs from "../components/outputs/Outputs";
+import Header from "../components/Header/Header";
 
 import { useState } from "react";
 
