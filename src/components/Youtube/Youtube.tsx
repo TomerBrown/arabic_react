@@ -12,9 +12,11 @@ import {
   Stack,
   Spinner,
 } from "@chakra-ui/react";
+import { Transcript } from "../../hooks/useYoutube";
 
 interface YoutubeProps {
   setArabicText: (text: string) => void;
+  setYoutubeTranscript: (transcripts:Transcript[]) => void;
   url: string;
   setUrl: (url: string) => void;
   handleSubmit?: () => void;
@@ -38,13 +40,14 @@ function isValidYoutubeUrlWithVParam(url: string): boolean {
 
 const Youtube = ({
   setArabicText,
+  setYoutubeTranscript,
   url,
   setUrl,
   handleSubmit,
   buttonText,
 }: YoutubeProps) => {
   const [youtubeAgain, setYoutubeAgain] = useState(false);
-  const { loading } = useYoutube(url, setArabicText, youtubeAgain);
+  const { loading } = useYoutube(url, setArabicText, setYoutubeTranscript, youtubeAgain);
   const defaultHandleSubmit = () => {
     setYoutubeAgain(!youtubeAgain);
   };

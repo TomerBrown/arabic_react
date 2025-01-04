@@ -1,13 +1,21 @@
 import useData from "./useData";
 
+interface Transcript {
+  text: string;
+  start: number;
+  duration: number;
+  end: number;
+}
+
 interface TranscribideText {
-  arabic_text: string;
+  transcript: Transcript[];
   type: string;
 }
 
 const useYoutube = (
   url: string,
   setArabicText: (text: string) => void,
+  setYoutubeTranscript: (transcripts: Transcript[]) => void,
   youtubeAgain: boolean
 ) => {
   return useData<TranscribideText>(
@@ -15,16 +23,21 @@ const useYoutube = (
     {
       method: "POST",
       maxBodyLength: Infinity,
-      url: url,
+      data: {
+        url: url,
+        format: "TEXT_AND_TIMESTAMPS",
+      },
       headers: {
         "Content-Type": "application/json",
       },
     },
     [youtubeAgain],
     (data: TranscribideText) => {
-      setArabicText(data.arabic_text);
+      setArabicText(data.transcript.map((t) => t.text).join("\n"));
+      setYoutubeTranscript(data.transcript);
     }
   );
 };
 
 export default useYoutube;
+export type { Transcript };
