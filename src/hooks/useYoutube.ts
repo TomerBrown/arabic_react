@@ -1,6 +1,6 @@
 import useData from "./useData";
 
-interface TranslatedText {
+interface TranscribideText {
   arabic_text: string;
   type: string;
 }
@@ -10,7 +10,7 @@ const useYoutube = (
   setArabicText: (text: string) => void,
   youtubeAgain: boolean
 ) => {
-  return useData<TranslatedText>(
+  return useData<TranscribideText>(
     "/youtube/",
     {
       method: "POST",
@@ -21,7 +21,7 @@ const useYoutube = (
       },
     },
     [youtubeAgain],
-    (data: TranslatedText) => {
+    (data: TranscribideText) => {
       setArabicText(data.arabic_text);
     }
   );
