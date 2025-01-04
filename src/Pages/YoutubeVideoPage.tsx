@@ -132,17 +132,18 @@ const YoutubeVideoPage = ({
             )}
           </Box>
         </VStack>
-
-        <HStack p={10}>
-          {TimedTextBox(
-            YoutubeTranscript,
-            "taatic",
-            "purple",
-            "תעתיק",
-            mapArabicToHebrewLetters
-          )}
-          {TimedTextBox(YoutubeTranscript, "text", "red", "תמלול")}
-        </HStack>
+        {isVideoFetched && (
+          <HStack p={10}>
+            {TimedTextBox(
+              YoutubeTranscript,
+              "taatic",
+              "purple",
+              "תעתיק",
+              mapArabicToHebrewLetters
+            )}
+            {TimedTextBox(YoutubeTranscript, "text", "red", "תמלול")}
+          </HStack>
+        )}
       </TemplatePage>
     </Box>
   );
